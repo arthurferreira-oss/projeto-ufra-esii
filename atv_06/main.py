@@ -1,7 +1,5 @@
 from services.servico_emprestimo import ServicoEmprestimo
 
-# 1. Como não há uma classe dentro de repositorio_emprestimo.py,
-# criamos um repositório simulado em memória para o serviço poder rodar
 class RepositorioEmMemoria:
     def __init__(self):
         self.emprestimos = {}
@@ -13,14 +11,12 @@ class RepositorioEmMemoria:
         self.emprestimos[emprestimo.id] = emprestimo
 
     def buscar_atrasados(self):
-        # Retorna uma lista vazia só para não quebrar a listagem
         return []
 
 def menu():
-    # 2. Instanciamos o repositório simulado
+
     repositorio_real = RepositorioEmMemoria()
     
-    # 3. Injetamos o repositório no construtor do ServicoEmprestimo (DIP Aplicado!)
     servico = ServicoEmprestimo(repositorio_real)
     
     while True:
