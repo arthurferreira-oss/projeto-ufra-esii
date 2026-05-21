@@ -1,7 +1,15 @@
 from services.servico_emprestimo import ServicoEmprestimo
+# Imports corrigidos com os nomes reais dos seus arquivos e classes:
+from repositories.repositorio_emprestimo import RepositorioEmprestimo 
+from services.notificador import Notificador 
 
 def menu():
-    servico = ServicoEmprestimo()
+    # Instanciando as classes com os nomes certos
+    repositorio = RepositorioEmprestimo()
+    notificador = Notificador()
+    
+    # Injetando no serviço
+    servico = ServicoEmprestimo(repositorio, notificador)
     
     while True:
         print("\n--- SISTEMA DE EMPRÉSTIMOS UFRA ---")
@@ -24,6 +32,7 @@ def menu():
                 print("Erro: Equipamento indisponível ou não encontrado.")
                 
         elif opcao == "3":
+            print("Saindo do sistema...")
             break
 
 if __name__ == "__main__":
