@@ -1,18 +1,22 @@
-# repositories/repositorio_emprestimo.py
 from typing import List, Optional
 import datetime
-from models.equipamento import Notebook, Projetor, Cabo, Equipamento
+from models.equipamento import Equipamento 
 from models.emprestimo import Emprestimo
 from repositories.interfaces import IRepositorioEmprestimo
 
+from models.fabrica_equipamento import FabricaEquipamento
+
 class RepositorioEmprestimo(IRepositorioEmprestimo):
     def __init__(self):
+    
+        criar = FabricaEquipamento.criar
         self._equipamentos = [
-            Notebook(1, "Notebook Dell", "notebook"),
-            Projetor(2, "Projetor Epson", "projetor"),
-            Cabo(3, "Cabo HDMI", "cabo"),
+            criar("notebook", 1, "Notebook Dell"),
+            criar("projetor", 2, "Projetor Epson"),
+            criar("cabo", 3, "Cabo HDMI"),
         ]
         self._emprestimos = []
+
 
     def buscar_equipamento(self, id: int) -> Optional[Equipamento]:
         return next((e for e in self._equipamentos if e.id == id), None)
